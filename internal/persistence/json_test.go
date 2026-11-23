@@ -57,6 +57,10 @@ func TestLoadScenarios(t *testing.T) {
 		{"invalid id counter", "{\"next_id\":0,\"tasks\":[]}", true},
 		{"duplicate id", "{\"next_id\":3,\"tasks\":[{\"id\":1,\"title\":\"A\",\"status\":\"new\",\"priority\":1},{\"id\":1,\"title\":\"B\",\"status\":\"done\",\"priority\":2}]}", true},
 		{"valid empty", "{\"next_id\":1,\"tasks\":[]}", false},
+		{"invalid status", "{\"next_id\": 2,\"tasks\": [{\"id\": 1,\"title\": \"fds\",\"status\": \"fsdfsfdsa\",\"priority\": 1}]}", true},
+		{"invalid priority", "{\"next_id\": 2,\"tasks\": [{\"id\": 1,\"title\": \"fds\",\"status\": \"new\",\"priority\": 0}]}", true},
+		{"invalid next_id", "{\"next_id\": 1,\"tasks\": [{\"id\": 1,\"title\": \"fds\",\"status\": \"new\",\"priority\": 1}]}", true},
+		{"void title", "{\"next_id\": 2,\"tasks\": [{\"id\": 1,\"title\": \"\",\"status\": \"new\",\"priority\": 1}]}", true},
 	}
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {

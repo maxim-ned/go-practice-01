@@ -67,3 +67,13 @@ func TestRestoreRejectsInvalidStateWithoutChangingStore(t *testing.T) {
 		}
 	}
 }
+
+func TestListDoesNotDependOnTheInternalSlice(t *testing.T) {
+	s := NewMemoryStore()
+	s.Add("fds", 1)
+	list := s.List()
+	list[0].ID = 2
+	if list[0].ID == s.tasks[0].ID {
+		t.Fatalf("List changes influence on the slice changes")
+	}
+}
