@@ -20,3 +20,7 @@
 *.tmp
 .DS_Store
 Thumbs.db
+
+# локальные хранилища данных
+/tasks.json
+/my-tasks.json
